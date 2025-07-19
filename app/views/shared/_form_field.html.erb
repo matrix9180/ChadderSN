@@ -1,0 +1,11 @@
+<div class="form-control w-full">
+  <%= form.label field_name, label_text, class: "label" %>
+  <%= form.send field_type, field_name, 
+      class: "input input-bordered w-full",
+      **field_options %>
+  <% if error_message.present? %>
+    <label class="label">
+      <span class="label-text-alt text-error"><%= error_message %></span>
+    </label>
+  <% end %>
+</div> 

@@ -1,0 +1,67 @@
+<div class="max-w-2xl mx-auto">
+  <%= render "shared/page_header", 
+      title: "Followers", 
+      subtitle: "People following #{@user.display_name}" %>
+  
+  <%= render "shared/flash_messages" %>
+
+  <div class="mb-6">
+    <%= link_to user_path(@user), class: "btn btn-ghost btn-sm" do %>
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+      </svg>
+      Back to Profile
+    <% end %>
+  </div>
+
+  <div class="space-y-4">
+    <% @followers.each do |follower| %>
+      <div class="card bg-base-100 shadow-lg">
+        <div class="card-body">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+              <div class="avatar placeholder">
+                <div class="bg-neutral text-neutral-content rounded-full w-12">
+                  <span class="text-lg"><%= follower.display_name.first.upcase %></span>
+                </div>
+              </div>
+              <div>
+                <h3 class="font-bold">
+                  <%= link_to follower.display_name, user_path(follower), class: "link link-primary" %>
+                </h3>
+                <p class="text-sm text-base-content/70">@<%= follower.username %></p>
+              </div>
+            </div>
+            
+            <% if Current.user && Current.user != follower %>
+              <% is_following = Current.user.followed_users.include?(follower) %>
+              <% if is_following %>
+                <%= button_to "Unfollow", follow_path(follower), 
+                    method: :delete, 
+                    class: "btn btn-outline btn-sm" %>
+              <% else %>
+                <%= button_to "Follow", follows_path(user_id: follower.id), 
+                    method: :post, 
+                    class: "btn btn-primary btn-sm" %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <% if @followers.empty? %>
+    <div class="text-center py-12">
+      <div class="text-6xl mb-4">👥</div>
+      <h3 class="text-xl font-bold mb-2">No followers yet</h3>
+      <p class="text-base-content/70">
+        <%= @user.display_name %> doesn't have any followers yet.
+      </p>
+    </div>
+  <% end %>
+
+  <% if @followers.any? %>
+    <%= paginate @followers %>
+  <% end %>
+</div> 

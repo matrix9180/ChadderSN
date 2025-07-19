@@ -1,0 +1,50 @@
+<div class="max-w-2xl mx-auto">
+  <%= render "shared/page_header", 
+      title: "Create New Post", 
+      subtitle: "Share something with the community" %>
+  
+  <%= render "shared/flash_messages" %>
+
+  <div class="card bg-base-200 shadow-xl">
+    <div class="card-body">
+      <%= form_with model: @post, local: true do |form| %>
+        <% if @post.errors.any? %>
+          <div class="alert alert-error mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <div>
+              <h3 class="font-bold">Error!</h3>
+              <div class="text-xs">
+                <ul class="list-disc list-inside">
+                  <% @post.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            </div>
+          </div>
+        <% end %>
+
+        <div class="form-control w-full mb-6">
+          <%= form.label :content, "What's on your mind?", class: "label" %>
+          <%= form.text_area :content, 
+              rows: 6,
+              placeholder: "Share your thoughts, ideas, or updates...",
+              class: "textarea textarea-bordered w-full",
+              maxlength: 1000 %>
+          <label class="label">
+            <span class="label-text-alt text-base-content/70">
+              <%= @post.content&.length || 0 %> / 1000 characters
+            </span>
+          </label>
+        </div>
+
+        <div class="flex justify-end space-x-4">
+          <%= link_to "Cancel", posts_path, class: "btn btn-ghost" %>
+          <%= form.submit "Create Post", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div> 

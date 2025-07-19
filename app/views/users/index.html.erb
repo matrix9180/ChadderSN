@@ -1,0 +1,65 @@
+<div class="max-w-4xl mx-auto">
+  <%= render "shared/page_header", 
+      title: "People", 
+      subtitle: "Discover and connect with other users" %>
+  
+  <%= render "shared/flash_messages" %>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <% @users.each do |user| %>
+      <div class="card bg-base-100 shadow-lg">
+        <div class="card-body">
+          <div class="flex items-center space-x-3 mb-4">
+            <div class="avatar placeholder">
+              <div class="bg-neutral text-neutral-content rounded-full w-12">
+                <span class="text-lg"><%= user.display_name.first.upcase %></span>
+              </div>
+            </div>
+            <div>
+              <h3 class="font-bold">
+                <%= link_to user.display_name, user_path(user), class: "link link-primary" %>
+              </h3>
+              <p class="text-sm text-base-content/70">@<%= user.username %></p>
+            </div>
+          </div>
+          
+          <div class="flex justify-between items-center text-sm text-base-content/70 mb-4">
+            <span><%= user.authored_posts.count %> posts</span>
+            <span><%= user.followers.count %> followers</span>
+          </div>
+          
+          <% if Current.user && Current.user != user %>
+            <% is_following = Current.user.followed_users.include?(user) %>
+            <% if is_following %>
+              <%= button_to "Unfollow", follow_path(user), 
+                  method: :delete, 
+                  class: "btn btn-outline btn-sm w-full" %>
+            <% else %>
+              <%= button_to "Follow", follows_path(user_id: user.id), 
+                  method: :post, 
+                  class: "btn btn-primary btn-sm w-full" %>
+            <% end %>
+          <% elsif Current.user == user %>
+            <div class="text-center text-sm text-base-content/50">
+              This is you
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <% if @users.empty? %>
+    <div class="text-center py-12">
+      <div class="text-6xl mb-4">👥</div>
+      <h3 class="text-xl font-bold mb-2">No users found</h3>
+      <p class="text-base-content/70">
+        There are no users in the system yet.
+      </p>
+    </div>
+  <% end %>
+
+  <% if @users.any? %>
+    <%= paginate @users %>
+  <% end %>
+</div> 

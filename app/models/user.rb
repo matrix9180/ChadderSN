@@ -18,6 +18,14 @@
 class User < ApplicationRecord
   has_secure_password
   has_many :sessions, dependent: :destroy
+  has_many :authored_posts, class_name: "Post", foreign_key: "author_id"
+
+  has_many :follows_as_follower, class_name: "Follow", foreign_key: "user_id"
+  has_many :follows_as_following, class_name: "Follow", foreign_key: "following_id"
+  has_many :followers, through: :follows_as_following, source: :user
+  has_many :followed_users, through: :follows_as_follower, source: :following
+  has_many :followed_posts, through: :followed_users, source: :authored_posts
+
 
   normalizes :email_address, with: ->(e) { e.strip.downcase }
 end

@@ -1,0 +1,78 @@
+<div class="max-w-2xl mx-auto">
+  <%= render "shared/page_header", 
+      title: "Following", 
+      subtitle: "People #{@user.display_name} is following" %>
+  
+  <%= render "shared/flash_messages" %>
+
+  <div class="mb-6">
+    <%= link_to user_path(@user), class: "btn btn-ghost btn-sm" do %>
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+      </svg>
+      Back to Profile
+    <% end %>
+  </div>
+
+  <div class="space-y-4">
+    <% @following.each do |followed_user| %>
+      <div class="card bg-base-100 shadow-lg">
+        <div class="card-body">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+              <div class="avatar placeholder">
+                <div class="bg-neutral text-neutral-content rounded-full w-12">
+                  <span class="text-lg"><%= followed_user.display_name.first.upcase %></span>
+                </div>
+              </div>
+              <div>
+                <h3 class="font-bold">
+                  <%= link_to followed_user.display_name, user_path(followed_user), class: "link link-primary" %>
+                </h3>
+                <p class="text-sm text-base-content/70">@<%= followed_user.username %></p>
+              </div>
+            </div>
+            
+            <% if Current.user && Current.user != followed_user %>
+              <% is_following = Current.user.followed_users.include?(followed_user) %>
+              <% if is_following %>
+                <%= button_to "Unfollow", follow_path(followed_user), 
+                    method: :delete, 
+                    class: "btn btn-outline btn-sm" %>
+              <% else %>
+                <%= button_to "Follow", follows_path(user_id: followed_user.id), 
+                    method: :post, 
+                    class: "btn btn-primary btn-sm" %>
+              <% end %>
+            <% elsif Current.user == @user %>
+              <%= button_to "Unfollow", follow_path(followed_user), 
+                  method: :delete, 
+                  class: "btn btn-outline btn-sm" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <% if @following.empty? %>
+    <div class="text-center py-12">
+      <div class="text-6xl mb-4">👥</div>
+      <h3 class="text-xl font-bold mb-2">Not following anyone yet</h3>
+              <p class="text-base-content/70">
+          <% if Current.user == @user %>
+            You're not following anyone yet. Start following people to see their posts in your feed!
+          <% else %>
+            <%= @user.display_name %> isn't following anyone yet.
+          <% end %>
+        </p>
+        <% if Current.user == @user %>
+          <%= link_to "Discover People", users_path, class: "btn btn-primary mt-4" %>
+        <% end %>
+    </div>
+  <% end %>
+
+  <% if @following.any? %>
+    <%= paginate @following %>
+  <% end %>
+</div> 

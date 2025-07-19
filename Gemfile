@@ -65,3 +65,6 @@ group :test do
 end
 
 gem "annotaterb", "~> 4.17"
+
+# Pagination
+gem "kaminari"
