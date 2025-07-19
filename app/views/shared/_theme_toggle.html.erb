@@ -1,4 +1,4 @@
-<div class="dropdown dropdown-end">
+<div class="dropdown dropdown-end" data-controller="theme-switcher">
   <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
     <svg class="swap-on fill-current w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
       <path d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z"/>
@@ -8,34 +8,34 @@
     </svg>
   </div>
   <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-    <li><a data-set-theme="light" data-act-class="active">Light</a></li>
-    <li><a data-set-theme="dark" data-act-class="active">Dark</a></li>
-    <li><a data-set-theme="cupcake" data-act-class="active">Cupcake</a></li>
-    <li><a data-set-theme="bumblebee" data-act-class="active">Bumblebee</a></li>
-    <li><a data-set-theme="emerald" data-act-class="active">Emerald</a></li>
-    <li><a data-set-theme="corporate" data-act-class="active">Corporate</a></li>
-    <li><a data-set-theme="synthwave" data-act-class="active">Synthwave</a></li>
-    <li><a data-set-theme="retro" data-act-class="active">Retro</a></li>
-    <li><a data-set-theme="cyberpunk" data-act-class="active">Cyberpunk</a></li>
-    <li><a data-set-theme="valentine" data-act-class="active">Valentine</a></li>
-    <li><a data-set-theme="halloween" data-act-class="active">Halloween</a></li>
-    <li><a data-set-theme="garden" data-act-class="active">Garden</a></li>
-    <li><a data-set-theme="forest" data-act-class="active">Forest</a></li>
-    <li><a data-set-theme="aqua" data-act-class="active">Aqua</a></li>
-    <li><a data-set-theme="lofi" data-act-class="active">Lo-Fi</a></li>
-    <li><a data-set-theme="pastel" data-act-class="active">Pastel</a></li>
-    <li><a data-set-theme="fantasy" data-act-class="active">Fantasy</a></li>
-    <li><a data-set-theme="wireframe" data-act-class="active">Wireframe</a></li>
-    <li><a data-set-theme="black" data-act-class="active">Black</a></li>
-    <li><a data-set-theme="luxury" data-act-class="active">Luxury</a></li>
-    <li><a data-set-theme="dracula" data-act-class="active">Dracula</a></li>
-    <li><a data-set-theme="cmyk" data-act-class="active">CMYK</a></li>
-    <li><a data-set-theme="autumn" data-act-class="active">Autumn</a></li>
-    <li><a data-set-theme="business" data-act-class="active">Business</a></li>
-    <li><a data-set-theme="acid" data-act-class="active">Acid</a></li>
-    <li><a data-set-theme="lemonade" data-act-class="active">Lemonade</a></li>
-    <li><a data-set-theme="night" data-act-class="active">Night</a></li>
-    <li><a data-set-theme="coffee" data-act-class="active">Coffee</a></li>
-    <li><a data-set-theme="winter" data-act-class="active">Winter</a></li>
+    <li><a href="#" data-set-theme="light" data-action="click->theme-switcher#setTheme" data-act-class="active">Light</a></li>
+    <li><a href="#" data-set-theme="dark" data-action="click->theme-switcher#setTheme" data-act-class="active">Dark</a></li>
+    <li><a href="#" data-set-theme="cupcake" data-action="click->theme-switcher#setTheme" data-act-class="active">Cupcake</a></li>
+    <li><a href="#" data-set-theme="bumblebee" data-action="click->theme-switcher#setTheme" data-act-class="active">Bumblebee</a></li>
+    <li><a href="#" data-set-theme="emerald" data-action="click->theme-switcher#setTheme" data-act-class="active">Emerald</a></li>
+    <li><a href="#" data-set-theme="corporate" data-action="click->theme-switcher#setTheme" data-act-class="active">Corporate</a></li>
+    <li><a href="#" data-set-theme="synthwave" data-action="click->theme-switcher#setTheme" data-act-class="active">Synthwave</a></li>
+    <li><a href="#" data-set-theme="retro" data-action="click->theme-switcher#setTheme" data-act-class="active">Retro</a></li>
+    <li><a href="#" data-set-theme="cyberpunk" data-action="click->theme-switcher#setTheme" data-act-class="active">Cyberpunk</a></li>
+    <li><a href="#" data-set-theme="valentine" data-action="click->theme-switcher#setTheme" data-act-class="active">Valentine</a></li>
+    <li><a href="#" data-set-theme="halloween" data-action="click->theme-switcher#setTheme" data-act-class="active">Halloween</a></li>
+    <li><a href="#" data-set-theme="garden" data-action="click->theme-switcher#setTheme" data-act-class="active">Garden</a></li>
+    <li><a href="#" data-set-theme="forest" data-action="click->theme-switcher#setTheme" data-act-class="active">Forest</a></li>
+    <li><a href="#" data-set-theme="aqua" data-action="click->theme-switcher#setTheme" data-act-class="active">Aqua</a></li>
+    <li><a href="#" data-set-theme="lofi" data-action="click->theme-switcher#setTheme" data-act-class="active">Lo-Fi</a></li>
+    <li><a href="#" data-set-theme="pastel" data-action="click->theme-switcher#setTheme" data-act-class="active">Pastel</a></li>
+    <li><a href="#" data-set-theme="fantasy" data-action="click->theme-switcher#setTheme" data-act-class="active">Fantasy</a></li>
+    <li><a href="#" data-set-theme="wireframe" data-action="click->theme-switcher#setTheme" data-act-class="active">Wireframe</a></li>
+    <li><a href="#" data-set-theme="black" data-action="click->theme-switcher#setTheme" data-act-class="active">Black</a></li>
+    <li><a href="#" data-set-theme="luxury" data-action="click->theme-switcher#setTheme" data-act-class="active">Luxury</a></li>
+    <li><a href="#" data-set-theme="dracula" data-action="click->theme-switcher#setTheme" data-act-class="active">Dracula</a></li>
+    <li><a href="#" data-set-theme="cmyk" data-action="click->theme-switcher#setTheme" data-act-class="active">CMYK</a></li>
+    <li><a href="#" data-set-theme="autumn" data-action="click->theme-switcher#setTheme" data-act-class="active">Autumn</a></li>
+    <li><a href="#" data-set-theme="business" data-action="click->theme-switcher#setTheme" data-act-class="active">Business</a></li>
+    <li><a href="#" data-set-theme="acid" data-action="click->theme-switcher#setTheme" data-act-class="active">Acid</a></li>
+    <li><a href="#" data-set-theme="lemonade" data-action="click->theme-switcher#setTheme" data-act-class="active">Lemonade</a></li>
+    <li><a href="#" data-set-theme="night" data-action="click->theme-switcher#setTheme" data-act-class="active">Night</a></li>
+    <li><a href="#" data-set-theme="coffee" data-action="click->theme-switcher#setTheme" data-act-class="active">Coffee</a></li>
+    <li><a href="#" data-set-theme="winter" data-action="click->theme-switcher#setTheme" data-act-class="active">Winter</a></li>
   </ul>
 </div> 
