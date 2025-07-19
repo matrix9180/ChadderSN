@@ -26,6 +26,9 @@ class User < ApplicationRecord
   has_many :followed_users, through: :follows_as_follower, source: :following
   has_many :followed_posts, through: :followed_users, source: :authored_posts
 
+  has_many :likes, dependent: :destroy
+  has_many :liked_posts, through: :likes, source: :post
+
 
   normalizes :email_address, with: ->(e) { e.strip.downcase }
 end

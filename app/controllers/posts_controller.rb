@@ -35,13 +35,59 @@ class PostsController < ApplicationController
   end
 
   def like
-    # TODO: Implement like functionality when likes table is added
-    redirect_to @post, notice: "Like functionality coming soon!"
+    @like = Current.user.likes.build(post: @post)
+
+    if @like.save
+      respond_to do |format|
+        format.turbo_stream {
+          render turbo_stream: turbo_stream.replace(
+            "like_button_#{@post.id}",
+            partial: "shared/like_button",
+            locals: { post: @post }
+          )
+        }
+        format.html { redirect_to @post, notice: "Post liked successfully!" }
+      end
+    else
+      respond_to do |format|
+        format.turbo_stream {
+          render turbo_stream: turbo_stream.replace(
+            "like_button_#{@post.id}",
+            partial: "shared/like_button",
+            locals: { post: @post }
+          )
+        }
+        format.html { redirect_to @post, alert: @like.errors.full_messages.join(", ") }
+      end
+    end
   end
 
   def unlike
-    # TODO: Implement unlike functionality when likes table is added
-    redirect_to @post, notice: "Unlike functionality coming soon!"
+    @like = Current.user.likes.find_by(post: @post)
+
+    if @like&.destroy
+      respond_to do |format|
+        format.turbo_stream {
+          render turbo_stream: turbo_stream.replace(
+            "like_button_#{@post.id}",
+            partial: "shared/like_button",
+            locals: { post: @post }
+          )
+        }
+        format.html { redirect_to @post, notice: "Post unliked successfully!" }
+      end
+    else
+      respond_to do |format|
+        format.turbo_stream {
+          render turbo_stream: turbo_stream.replace(
+            "like_button_#{@post.id}",
+            partial: "shared/like_button",
+            locals: { post: @post }
+          )
+        }
+        format.html { redirect_to @post, alert: "You haven't liked this post." }
+      end
+    end
   end
 
   private

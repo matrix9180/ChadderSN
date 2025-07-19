@@ -18,9 +18,16 @@
 #
 class Post < ApplicationRecord
   belongs_to :author, class_name: "User"
+  has_many :likes, dependent: :destroy
+  has_many :likers, through: :likes, source: :user
 
   validates :content, presence: true, length: { maximum: 1000 }
 
   scope :recent, -> { order(created_at: :desc) }
   scope :by_user, ->(user) { where(author: user) }
+
+  def liked_by?(user)
+    return false unless user
+    likers.include?(user)
+  end
 end
