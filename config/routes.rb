@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :hashtags, only: [ :index, :show ], param: :name
   resource :session
   resources :passwords, param: :token
 
