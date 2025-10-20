@@ -64,7 +64,7 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem "annotaterb", "~> 4.17"
+gem "annotaterb", "~> 4.20"
 
 # Pagination
 gem "kaminari"
